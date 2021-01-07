@@ -3,8 +3,8 @@ import React, { createContext, useReducer, useContext } from "react";
 import {
     ADD_MOVIES_FOR_NOMINATION,
     DELETE_MOVIES_FROM_NOMINATION
- }
-     from './Action'
+}
+    from './Action'
 
 const MoviesNominationContext = createContext({});
 const { Provider } = MoviesNominationContext;
@@ -12,18 +12,16 @@ const { Provider } = MoviesNominationContext;
 function reducer(state, action) {
     switch (action.type) {
         case ADD_MOVIES_FOR_NOMINATION:
-            return [
+            console.log(`inside reducer ${action.workType}`,)
+            return {
                 ...state,
-                {
-                    id: state.length * Math.random(),
-                    name: action.name
-                }
-            ];
+                allMovies:action.allMovies
+                
+            }
+
         case DELETE_MOVIES_FROM_NOMINATION:
-            return state.filter((_, index) => {
-                return index !== action.index;
-            });
-        
+            return [...state, {}]
+
         default:
             return state;
     }
@@ -31,8 +29,8 @@ function reducer(state, action) {
 
 function MoviesNominationProvider({ value = [], ...props }) {
     const [state, dispatch] = useReducer(reducer, {
-        allMovies:[],
-        nominatedMovies:[]
+        allMovies: [],
+        nominatedMovies: []
     });
 
     return <Provider value={[state, dispatch]} {...props} />;
