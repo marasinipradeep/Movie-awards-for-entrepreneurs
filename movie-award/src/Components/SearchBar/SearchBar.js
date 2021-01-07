@@ -1,9 +1,18 @@
 import React from 'react'
 
-export default function SearchBar() {
+export default function SearchBar(props) {
     return (
+
+        
         <div>
-            <input type="text" placeholder="Search.."></input>
+            <form>
+
+                <div className="row">
+                    <p className="col-md-12">Movie Title: </p>
+                    <input onChange={props.handleSearch} type="text"></input>
+                </div>
+            </form>
+
         </div>
     )
 }
