@@ -1,13 +1,31 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Card, Button } from 'react-bootstrap'
 
 //import from Utils
 //import API from "../../Utils/API"
+import API from "../../Utils/API";
 import { useMoviesNominationContext } from "../../Utils/GlobalState";
-export default function MoviesList() {
+import { ADD_MOVIES_FOR_NOMINATION, } from "../../Utils/Action";
+
+
+export default function MoviesList(props) {
 
     const [state, dispatch] = useMoviesNominationContext();
 
+    function nominateMovie(nominatedMovie){
+
+        console.log(`nominated movie inside nominateMovie is ${nominatedMovie}`)
+        nominatedMovie = state.allMovies.Title
+        console.log(`nominated movie inside nominateMovie is ${nominatedMovie}`)
+
+        dispatch({
+            type:ADD_MOVIES_FOR_NOMINATION,
+            nominatedMovies: nominatedMovie
+        })
+
+        console.log(state)
+
+    }
 
     return (
         <>
@@ -23,7 +41,7 @@ export default function MoviesList() {
                             <Card.Text>About: {state.allMovies.Plot} </Card.Text>
                             
 
-                            <Button variant="primary">Nominate</Button>
+                            <Button variant="primary" onClick={()=>nominateMovie("hello")}>Nominate</Button>
                         </Card.Body>
                     </Card>
                 </div>
