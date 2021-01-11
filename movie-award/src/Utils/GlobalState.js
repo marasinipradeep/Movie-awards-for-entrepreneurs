@@ -13,12 +13,11 @@ const { Provider } = MoviesNominationContext;
 function reducer(state, action) {
     switch (action.type) {
         case SEARCH_MOVIES_FOR_NOMINATION:
-            console.log(`inside reducer SEARCH_MOVIES_FOR_NOMINATION ${action.allMovies}`)
+            console.log(`inside reducer SEARCH_MOVIES_FOR_NOMINATION`)
             console.log(action.allMovies)
             return {
                 ...state,
                 allMovies: action.allMovies
-
             }
 
         case ADD_MOVIES_FOR_NOMINATION:
@@ -26,12 +25,21 @@ function reducer(state, action) {
             console.log(action.nominatedMovies)
             return {
                 ...state,
-                nominatedMovies: [action.nominatedMovies]
-
+                nominatedMovies: [action.nominatedMovies, ...state.nominatedMovies]
             }
 
         case DELETE_MOVIES_FROM_NOMINATION:
-            return [...state, {}]
+            const removeNominatedMovie = state.allMovies.filter(removeNominatedMovie => {
+                console.log(`inside delete nominated movies`)
+                console.log(removeNominatedMovie.nominatedMovies)
+                console.log(action.removeNominatedMovies)
+                return removeNominatedMovie.nominatedMovies === action.removeNominatedMovies
+            })
+
+            return {
+                ...state,
+                nominatedMovies:removeNominatedMovie
+            }
 
         default:
             return state;

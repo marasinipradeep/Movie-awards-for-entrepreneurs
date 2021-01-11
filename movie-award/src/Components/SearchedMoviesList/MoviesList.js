@@ -11,17 +11,14 @@ export default function MoviesList(props) {
 
     const [state, dispatch] = useMoviesNominationContext();
 
-    function nominateMovie(poster, title, year) {
-
+    function nominateMovie(id) {
+        let clickedItem = state.allMovies.find(element => element.imdbID===id)
         dispatch({
             type: ADD_MOVIES_FOR_NOMINATION,
-            nominatedMovies: { Poster: poster, Title: title, Year: year }
+            nominatedMovies: clickedItem
         })
-
-        console.log(`Nomination state `)
-        console.log(state)
-
     }
+
     if (state.allMovies.length === undefined || state.allMovies.length === 0 || state.allMovies.length === null) {
         return (
             <div className="container">
@@ -34,23 +31,16 @@ export default function MoviesList(props) {
         <div className="container">
             <div className="row">
                 {state.allMovies.map((allMovies) => (
-
                     <Card style={{ width: '18rem' }} className="col-md- p-4 m-4" key={allMovies.imdbID}>
-
                         <Card.Img variant="top" src={allMovies.Poster} />
                         <Card.Body>
                             <Card.Title>Movie Name: {allMovies.Title}</Card.Title>
                             <Card.Text>Year: {allMovies.Year} </Card.Text>
-                            <Button variant="primary" onClick={() => nominateMovie(allMovies.Poster, allMovies.Title, allMovies.Year)}>Nominate</Button>
+                            <Button variant="primary" onClick={() => nominateMovie(allMovies.imdbID)}>Nominate</Button>
                         </Card.Body>
                     </Card>
-
-
-
                 ))}
             </div>
         </div>
-
     );
-
 }

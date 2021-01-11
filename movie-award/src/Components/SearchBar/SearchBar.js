@@ -26,7 +26,7 @@ export default function SearchBar() {
         <div className="container">
             <form className="row filter-form">
                 <div className="form-group m-4">
-                    <h3 >Search Movie</h3><br/>
+                    <h3 >Search Movie</h3><br />
                     <input
                         name="movie"
                         id="movie"
@@ -34,9 +34,7 @@ export default function SearchBar() {
                     >
                     </input>
                 </div>
-
             </form>
-
         </div>
     )
 }
