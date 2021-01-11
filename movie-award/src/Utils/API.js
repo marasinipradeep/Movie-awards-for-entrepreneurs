@@ -5,6 +5,6 @@ import axios from "axios";
 export default {
     // Get  Movie details
     getAllEmployee: function (movie) {
-        return axios.get("https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy");
+        return axios.get("https://www.omdbapi.com/?s=" +movie+ "&apikey=trilogy&Type=movie&page=1" );
     }
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 //import from Utils
 //import API from "../../Utils/API"
@@ -11,35 +11,27 @@ export default function SearchBar() {
     const [state, dispatch] = useMoviesNominationContext();
 
     function searchByMovieName(e) {
-        console.log(e.target.value)
-        API.getAllEmployee(e.target.value).then((movies) => {
-            console.log(`All listed movies are ${movies}`)
-            console.log(movies)
+        API.getAllEmployee(e.target.value).then((retrievedMovies) => {
+            console.log(`Searchbar data from API`)
+            console.log(retrievedMovies.data.Search)
             dispatch({
                 type: SEARCH_MOVIES_FOR_NOMINATION,
-                allMovies: movies.data
+                allMovies: retrievedMovies.data.Search
             })
         })
-
-        console.log("state inside search bar after dispatch")
-        console.log(state)
-
     }
 
 
     return (
-
-
-        <div>
-            <form className="filter-form">
-                <div className="form-group">
-                    <label htmlFor="type">Search Movie</label>
+        <div className="container">
+            <form className="row filter-form">
+                <div className="form-group m-4">
+                    <h3 >Search Movie</h3><br/>
                     <input
                         name="movie"
                         id="movie"
                         onChange={searchByMovieName}
                     >
-
                     </input>
                 </div>
 

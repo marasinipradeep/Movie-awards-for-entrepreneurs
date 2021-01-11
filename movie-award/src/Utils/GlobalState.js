@@ -13,7 +13,8 @@ const { Provider } = MoviesNominationContext;
 function reducer(state, action) {
     switch (action.type) {
         case SEARCH_MOVIES_FOR_NOMINATION:
-            console.log(`inside reducer ${action.workType}`,)
+            console.log(`inside reducer SEARCH_MOVIES_FOR_NOMINATION ${action.allMovies}`)
+            console.log(action.allMovies)
             return {
                 ...state,
                 allMovies: action.allMovies
@@ -21,10 +22,11 @@ function reducer(state, action) {
             }
 
         case ADD_MOVIES_FOR_NOMINATION:
-            console.log(`inside reducer ${action.nominatedMovies}`,)
+            console.log(`inside reducer ADD_MOVIES_FOR_NOMINATION`)
+            console.log(action.nominatedMovies)
             return {
                 ...state,
-                nominatedMovies: action.nominatedMovies
+                nominatedMovies: [action.nominatedMovies]
 
             }
 
