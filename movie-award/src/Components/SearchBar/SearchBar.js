@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useRef} from 'react'
 
 //import from Utils
 //import API from "../../Utils/API"
@@ -9,10 +9,17 @@ import { SEARCH_MOVIES_FOR_NOMINATION, } from "../../Utils/Action"
 export default function SearchBar() {
 
     const [state, dispatch] = useMoviesNominationContext();
+    const searchMovie = useRef();
 
     function searchByMovieName(e) {
-        API.getAllEmployee(e.target.value).then((retrievedMovies) => {
+
+        e.preventDefault()
+        const inputValue = searchMovie.current.value;
+        console.log(`input value is ${inputValue}`)
+
+        API.getAllEmployee(inputValue).then((retrievedMovies) => {
             console.log(`Searchbar data from API`)
+            console.log(retrievedMovies)
             console.log(retrievedMovies.data.Search)
             dispatch({
                 type: SEARCH_MOVIES_FOR_NOMINATION,
@@ -30,9 +37,11 @@ export default function SearchBar() {
                     <input
                         name="movie"
                         id="movie"
-                        onChange={searchByMovieName}
+                        //onChange={searchByMovieName}
+                        ref={searchMovie}
                     >
                     </input>
+                    <button onClick={searchByMovieName}> Search</button>
                 </div>
             </form>
         </div>

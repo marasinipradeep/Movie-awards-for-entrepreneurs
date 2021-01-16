@@ -22,23 +22,42 @@ function reducer(state, action) {
 
         case ADD_MOVIES_FOR_NOMINATION:
             console.log(`inside reducer ADD_MOVIES_FOR_NOMINATION`)
-            console.log(action.nominatedMovies)
+           // console.log(action.nominatedMovies)
+            console.log(state.nominatedMovies)
+
+            if(state.nominatedMovies.length ===5){
+                return{
+                    ...state,
+                    nominatedMovies:[...state.nominatedMovies]
+                }
+            }
+
+            const checkAlreadyNominatedMovies = state.nominatedMovies.includes(action.nominatedMovies)
+            console.log(checkAlreadyNominatedMovies)
+
+            if(checkAlreadyNominatedMovies){
+                return{
+                    ...state,
+                    nominatedMovies:[...state.nominatedMovies]
+                }
+            }
+            
             return {
                 ...state,
                 nominatedMovies: [action.nominatedMovies, ...state.nominatedMovies]
             }
 
         case DELETE_MOVIES_FROM_NOMINATION:
-            const removeNominatedMovie = state.allMovies.filter(removeNominatedMovie => {
+            const removeNominatedMovie = state.nominatedMovies.filter(removeNominatedMovie => {
                 console.log(`inside delete nominated movies`)
-                console.log(removeNominatedMovie.nominatedMovies)
+                console.log(removeNominatedMovie.imdbID)
                 console.log(action.removeNominatedMovies)
-                return removeNominatedMovie.nominatedMovies === action.removeNominatedMovies
+                return removeNominatedMovie.imdbID !== action.removeNominatedMovies
             })
 
             return {
                 ...state,
-                nominatedMovies:removeNominatedMovie
+                nominatedMovies: removeNominatedMovie
             }
 
         default:

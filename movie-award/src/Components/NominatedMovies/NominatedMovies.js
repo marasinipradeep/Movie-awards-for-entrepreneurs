@@ -18,11 +18,17 @@ export default function NominatedMovies() {
             removeNominatedMovies: id
         })
     }
+
+   
     return (
+
+
         <div className="container">
             <div className="row">
                 <h4 > YOUR NOMINATIONS ARE : </h4>
                 {state.nominatedMovies.map(nominatedMovies =>
+
+
                     <Card style={{ width: '18rem' }} className="col-md- p-4 m-4" key={nominatedMovies.imdbID}>
                         <Card.Img variant="top" src={nominatedMovies.Poster} />
                         <Card.Body>
