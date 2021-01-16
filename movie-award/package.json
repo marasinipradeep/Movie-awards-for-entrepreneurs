@@ -16,8 +16,7 @@
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4"
   },
-
-  "homepage": "https://marasinipradeep.github.io/Movie-awards-for-entrepreneurs",
+  "homepage": "https://marasinipradeep.github.io/movie-award",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
